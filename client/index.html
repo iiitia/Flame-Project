@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborative Canvas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div>
+        <h1>Collaborative Canvas</h1>
+        <p id="status">Connecting...</p>
+      </div>
+      <div class="controls">
+        <label>Room <input id="room-id" value="lobby" /></label>
+        <label>Name <input id="user-name" value="Guest" /></label>
+        <button id="join-btn" class="primary">Join</button>
+        <button id="export-btn" class="ghost">Export PNG</button>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <div class="tool-group">
+        <button data-tool="brush" class="tool active">Brush</button>
+        <button data-tool="eraser" class="tool">Eraser</button>
+        <button data-tool="highlighter" class="tool">Highlighter</button>
+      </div>
+      <div class="tool-group">
+        <button data-tool="line" class="tool">Line</button>
+        <button data-tool="rect" class="tool">Rect</button>
+        <button data-tool="circle" class="tool">Circle</button>
+       
+      </div>
+      <div class="tool-group">
+        <label>Color <input type="color" id="color-picker" value="#7c3aed" /></label>
+        <label>Width <input type="range" id="width-picker" min="1" max="24" value="5" /></label>
+        <label>Eraser Size <input type="range" id="eraser-width-picker" min="4" max="48" value="12" /></label>
+      </div>
+      <div class="tool-group">
+        <button id="undo-btn" class="ghost">Undo</button>
+        <button id="redo-btn" class="ghost">Redo</button>
+        <button id="presence-btn" class="ghost" title="Toggle observing mode (you won't show as Active just by moving cursor)">👀 Observing: Off</button>
+      </div>
+      <div class="metrics">
+        <span class="chip" id="latency">-- ms</span>
+        <span class="chip" id="fps">-- fps</span>
+      </div>
+    </section>
+
+    <main>
+      <aside>
+        <h3>Online</h3>
+        <ul id="users"></ul>
+      </aside>
+      <div class="canvas-wrapper">
+        <canvas id="canvas" width="1200" height="800"></canvas>
+        <canvas id="overlay" width="1200" height="800"></canvas>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="websocket.js"></script>
+  <script src="canvas.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
